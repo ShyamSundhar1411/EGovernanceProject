@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import environ
 from pathlib import Path
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=#m=w!+@12xm4gf=0b7+s-_%+8l=td0r0cateo$*m=7$oqqn4='
+SECRET_KEY = env.str('SECRET_KEY', default='ThisIsAWeakSauceSecretKey')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,12 +78,12 @@ WSGI_APPLICATION = 'governance.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'governanceDB',
-        'USER':'postgres',
-        'PASSWORD':'Shyam1411',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'ENGINE': env.str('ENGINE'),
+        'NAME': env.str('NAME'),
+        'USER':env.str('USER'),
+        'PASSWORD':env.str('PASSWORD'),
+        'HOST':env.str('HOST'),
+        'PORT':env.str('PORT'),
     }
 }
 
