@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class PassPort(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    Name = models.CharField(max_length = 45)
+    SurName = models.Charfield(max_length = 45)
     No_of_Pages = models.IntegerField(choices = Page_Choices)
     PAN_Card = models.CharField(max_length = 500,validators=[RegexValidator(PAN_Validator,message = "Enter a Valid PAN Number")],blank = True,null = True)
     Aadhaar_Card = models.CharField(max_length = 500,validators=[RegexValidator(aadhaar_Validator,message = "Enter a Valid Aadhar Number")],blank = True,null = True)
@@ -17,6 +19,7 @@ class PassPort(models.Model):
     Date_of_Birth = models.DateField(max_length = 8)
     Alias_Names = models.BooleanField(default = False,blank = True,null = True)
     Name_Change = models.BooleanField(default = False)
+    Birth_in_Indian = models.BooleanField(default = None)
     def __str__(self):
         return self.user.username
     
