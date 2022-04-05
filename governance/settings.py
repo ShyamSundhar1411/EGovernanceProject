@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'services',
+    'autoslug',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +79,8 @@ WSGI_APPLICATION = 'governance.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': env.str('ENGINE'),
-        'NAME': env.str('NAME'),
-        'USER':env.str('USER'),
-        'PASSWORD':env.str('PASSWORD'),
-        'HOST':env.str('HOST'),
-        'PORT':env.str('PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3'
     }
 }
 
