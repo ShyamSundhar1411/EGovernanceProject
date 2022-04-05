@@ -2,7 +2,7 @@
 name = "egovernance_project"
 version = "0.1.0"
 description = ""
-authors = ["ShyamSundhar1411 <clashwithchiefrpjyt@gmail.com>"]
+authors = ["ShyamSundhar1411 <65313257+ShyamSundhar1411@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
