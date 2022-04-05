@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import environ
 from pathlib import Path
 env = environ.Env()
+from django.contrib.messages import constants as messages
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'services',
     'autoslug',
 ]
@@ -124,7 +126,50 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS  = [
     BASE_DIR / 'governance/static'
 ]
-
+#Media Serves
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+#Messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+ }
+AUTHENTICATION_BACKENDS = {
+    #Default Auth_Backend
+    'django.contrib.auth.backends.ModelBackend',
+    #Social Account
+    'social_core.backends.google.GoogleOAuth2',
+}
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.mail.mail_validation',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'profile',
+    'email',
+]
+SITE_ID = 1
+#Login
+LOGIN_URL = "home"
+LOGIN_REDIRECT_URL = "portal"
+LOGOUT_REDIRECT_URL = "home"
+LOGOUT_URL = "logout"
+#CrispyForms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
