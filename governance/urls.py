@@ -23,7 +23,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name = "home"),
-    path('services/',include("service.urls")),
+    path('services/',include("services.urls")),
     path("registration/",include("social_django.urls",namespace = "social")),
     path('logout/',auth_views.LogoutView.as_view(),name = "logout"),
 ]
