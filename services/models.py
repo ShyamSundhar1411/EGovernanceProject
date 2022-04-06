@@ -1,4 +1,4 @@
-from re import A
+import random
 from . choices import Page_Choices,State_Choices,Martial_Status_Choices,Employment_Choices,Educational_Choices,Application_Status_Choices
 from .validatorExpressions import PAN_Validator,aadhaar_Validator
 from django.db import models
@@ -29,11 +29,14 @@ class PassPort(models.Model):
     Non_ECR_Category = models.BooleanField(default = False)
     Visible_Distinguishing_Mark = models.CharField(max_length = 100,blank = True)
     Application_Status = models.CharField(max_length = 200,choices = Application_Status_Choices)
+    Application_Id = models.PositiveBigIntegerField(blank = True)
     slug = AutoSlugField(populate_from = "Name",unique=True)
     def __str__(self):
         return self.user.username
-    
-        
+    def save(self, *args, **kwargs):
+        if not self.Application_Id:
+            self.Application_Id = random.randint(0,10000)
+        super(PassPort,self).save(*args,**kwargs)
     
     
     

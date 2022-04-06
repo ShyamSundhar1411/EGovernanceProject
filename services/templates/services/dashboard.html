@@ -3,5 +3,16 @@
 <div class = "container">
     <h1 class = "text-center">Dashboard</h1>
     <hr/>
+    <ul class="list-group">
+        {% for passport in Passports %}
+            {% if passport.Application_Status == "In Queue" %}
+                <li class="list-group-item list-group-item-primary">{{passport.Application_Id}}</li>
+            {% elif passport.Application_Status == "Processed and Approved" %}
+                <li class="list-group-item list-group-item-success">{{passport.Application_Id}}</li>
+            {% else %}
+            <li class="list-group-item list-group-item-danger">{{passport.Application_Id}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
