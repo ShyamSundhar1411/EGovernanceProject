@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'social_django',
     'services',
     'autoslug',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -165,7 +166,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
 SITE_ID = 1
 #Login
 LOGIN_URL = "home"
-LOGIN_REDIRECT_URL = "portal"
+LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "home"
 LOGOUT_URL = "logout"
 #CrispyForms

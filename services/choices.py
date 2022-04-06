@@ -35,3 +35,13 @@ Application_Status_Choices = [
     ("Processed and Approved","Processed and Approved"),
     ("Cancelled","Cancelled"),
 ]
+Gender_Choices = [
+    ("Male","Male"),
+    ("Female","Female"),
+    ("Transgender","Transgender"),
+]
+Citizenship_Choices = [
+    ("Birth","Birth"),
+    ("Registration/Naturalization","Registration/Naturalization"),
+    ("Descent","Descent")
+]

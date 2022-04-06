@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class ="container">
+    <h1 class = "text-center">Passport Application</h1>
+    <hr/>
+    <form method = "POST" enctype = "multipart/form-data">
+        {% csrf_token %}
+        <div class = "row">
+            <div class = "col-md-4">
+                {{form.Name|as_crispy_field}}
+            </div>
+            <div class = "col-md-4">
+                {{form.Surname|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-4">
+                {{form.Gender|as_crispy_field}}
+            </div>
+            <div class = "col-md-4">
+                {{form.Date_of_Birth|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-3">
+                {{form.Place_of_Birth|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.State|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.District|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-3">
+                {{form.Citizenship_of_India|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.Government_Servant|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.Non_ECR_Category|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-3">
+                {{form.Marital_Status|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.Educational_Qualification|as_crispy_field}}
+            </div>
+            <div class = "col-md-3">
+                {{form.Employment_Type|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-6">
+                {{form.PAN|as_crispy_field}}
+            </div>
+            <div class = "col-md-6">
+                {{form.Aadhaar_Number|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-6">
+                {{form.Visible_Distinguishing_Mark|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "row" style = "margin-bottom:10px;">
+            <div class = "col-md-6">
+                {{form.No_of_Pages|as_crispy_field}}
+            </div>
+        </div>
+        <div class = "d-inline-block py-2">
+            <button type = "submit" class = "btn btn-outline-success">Apply</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+      $("#id_Date_of_Birth").datepicker({
+        format:'yyyy-dd-mm',
+      });
+    });
+  </script>
+{% endblock %}
