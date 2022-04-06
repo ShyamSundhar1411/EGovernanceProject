@@ -20,7 +20,7 @@ def dashboard(request):
 @login_required
 def passportapplciation(request):
     if request.method == "POST":
-        application = PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "In Queue").exists()
+        application = PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "In Queue").exists() or PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "Awaiting Document Upload").exists()
         passportform = PassPortApplicationForm(request.POST)
         if passportform.is_valid():
             passport = passportform.save(commit = False)
@@ -28,7 +28,7 @@ def passportapplciation(request):
             if application:
                 passport.Application_Status = "Cancelled"
             else:
-                passport.Application_Status = "In Queue"
+                passport.Application_Status = "Awaiting Document Upload"
             #passport.
             passport.save()
             messages.success(request,"Passport Application Successful. You may find the Application Status in the dashboard of your Account")
@@ -36,3 +36,10 @@ def passportapplciation(request):
         else:
             return render(request,"services/passportapplication.html",{"form":passportform})
     return render(request,"services/passportapplication.html",{"form":PassPortApplicationForm()})
+@login_required
+def approveapplication(request,pk,slug):
+    if request.user.is_superuser:
+        Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
+        return render(request,"services/approveapplication.html",{"Application":Application})
+    else:
+        return redirect("dashboard")

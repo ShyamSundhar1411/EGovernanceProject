@@ -37,6 +37,3 @@ class PassPort(models.Model):
         if not self.Application_Id:
             self.Application_Id = random.randint(0,10000)
         super(PassPort,self).save(*args,**kwargs)
-    
-    
-    

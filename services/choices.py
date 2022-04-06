@@ -32,6 +32,7 @@ Educational_Choices = [
 ]
 Application_Status_Choices = [
     ("In Queue","In Queue"),
+    ("Awaiting Documents Upload","Awaiting Documents Upload"),
     ("Processed and Approved","Processed and Approved"),
     ("Cancelled","Cancelled"),
 ]

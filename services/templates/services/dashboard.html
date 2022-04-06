@@ -1,18 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class = "container">
+<div class = "container" style = "margin-bottom:500px;">
     <h1 class = "text-center">Dashboard</h1>
     <hr/>
     <ul class="list-group">
         {% for passport in Passports %}
             {% if passport.Application_Status == "In Queue" %}
-                <li class="list-group-item list-group-item-primary">{{passport.Application_Id}}</li>
+                <li class="list-group-item list-group-item-dark">{{passport.Application_Id}}
+                    {% if user.is_superuser %}
+                        <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    {% else %}
+                        Nothing
+                    {% endif %}
+                </li>
             {% elif passport.Application_Status == "Processed and Approved" %}
-                <li class="list-group-item list-group-item-success">{{passport.Application_Id}}</li>
+                <li class="list-group-item list-group-item-success">{{passport.Application_Id}}
+                    {% if user.is_superuser %}
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    {% else %}
+                    Nothing
+                    {% endif %}
+                </li>
+            {% elif passport.Application_Status == "Awaiting Documents Upload" %}
+                <li class="list-group-item list-group-item-info">{{passport.Application_Id}}
+                    {% if user.is_superuser %}
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    {% else %}
+                    Nothing
+                    {% endif %}
+                </li>
             {% else %}
-            <li class="list-group-item list-group-item-danger">{{passport.Application_Id}}</li>
+            <li class="list-group-item list-group-item-danger">{{passport.Application_Id}}
+                {% if user.is_superuser %}
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                {% else %}
+                    Nothing
+                 {% endif %}
+            </li>
             {% endif %}
         {% endfor %}
     </ul>
+    <div class = "d-inline-block py-2">
+        <a class = "btn btn-primary" style="background: linear-gradient(-140deg, #405de6 0%, #5851d8 17%, #833ab4 37%, #c13584 49%, #e1306c 72%, #e1306c 88%, #ee8bac 97%, #ffdc80 100%), var(--bs-red);" href = "{% url 'logout' %}">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    </div>
 </div>
 {% endblock %}
