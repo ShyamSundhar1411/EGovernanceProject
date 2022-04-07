@@ -2,6 +2,68 @@
 {% block content %}
 <div class = "container">
     <h1 class = "text-center">Application No : {{Application.Application_Id}}</h1>
+    <p class="text-center text-muted"><span class="date">{{Application.Date_of_Application|date:'M d, Y'}}</span></p>
     <hr/>
+    <div class="card">
+        <div class="card-body">
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-6">
+                    <h5 class="card-text">First Name : {{Application.Name}}</h5>
+                </div>
+                {% if Application.Surname %}
+                <div class = "col-md-6">
+                    <h5 class="card-text">Surname : {{Application.Surname}}</h5>
+                </div>
+                {% endif %}
+            </div>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-4">
+                    <h5 class="card-text">Gender : {{Application.Gender}}</h5>
+                </div>
+                <div class = "col-md-4">
+                    <h5 class="card-text">Date Of Birth : {{Application.Date_of_Birth}}</h5>
+                </div>
+                <div class = "col-md-4">
+                    <h5 class="card-text">Marital Status : {{Application.Marital_Status}}</h5>
+                </div>
+            </div>
+            <h5 class = "card-text">Residence : {{Application.House_Name}}</h5>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-4">
+                    <h5 class="card-text">Place of Birth : {{Application.Place_of_Birth}}</h5>
+                </div>
+                <div class = "col-md-4">
+                    <h5 class="card-text">State : {{Application.State}}</h5>
+                </div>
+                <div class = "col-md-4">
+                    <h5 class="card-text">District : {{Application.District}}</h5>
+                </div>
+            </div>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-6">
+                    <h5 class="card-text">Education: {{Application.Educational_Qualification}}</h5>
+                </div>
+                <div class = "col-md-6">
+                    <h5 class="card-text">Employment Type : {{Application.Employment_Type}}</h5>
+                </div>
+            </div>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-5">
+                    <h5 class="card-text">Citizenship of India by: {{Application.Citizenship_of_India}}</h5>
+                </div>
+                <div class = "col-md-6">
+                    <h5 class="card-text">Is Applicant Eligible for Non-ECR Category ?  {% if Application.Non_ECR_Category %}Yes{% else %}No{% endif %}</h5>
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-md-6">
+                    <h5 class="card-text">Is either of your parent (in case of minor)/spouse, a government servant ? {% if Application.Government_Servant %}Yes{% else %}No{% endif %}</h5>
+                </div>
+                <div class = "col-md-4">
+                    <h5 class="card-text">Type of Passport Applied : {{Application.No_of_Pages}} Pages</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from . models import PassPort
+from . models import Document,PassPort
 from . forms import DocumentUploadForm, PassPortApplicationForm
 from django.shortcuts import render,redirect
 from django.contrib import messages
@@ -59,9 +59,30 @@ def upload_document(request,pk,slug):
         return redirect("dashboard")
               
 @login_required
-def approveapplication(request,pk,slug):
+def approvalapplicationpage(request,pk,slug):
     if request.user.is_superuser:
         Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
-        return render(request,"services/approveapplication.html",{"Application":Application})
+        Documents = Document.objects.prefetch_related("Passport").get(Passport = Application)
+        return render(request,"services/approveapplication.html",{"Application":Application,"Document":Documents})
     else:
         return redirect("dashboard")
+def approveapplication(request,pk,slug):
+    Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
+    if request.method == "POST" and request.user.is_superuser:
+        Application.Application_Status = "Processed and Approved"
+        Application.save()
+        messages.success(request,"Approved Application successfully")
+        return redirect("approve_application",pk = pk,slug = slug)
+    else:
+        messages.error(request,"Error While Processing Request")
+        return redirect("approve_application",pk = pk,slug = slug)
+def cancelapplication(request,pk,slug):
+    Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
+    if request.method == "POST" and request.user.is_superuser:
+        Application.Application_Status = "Cancelled"
+        Application.save()
+        messages.success(request,"Approved Application successfully")
+        return redirect("approve_application",pk = pk,slug = slug)
+    else:
+        messages.error(request,"Error While Processing Request")
+        return redirect("approve_application",pk = pk,slug = slug)

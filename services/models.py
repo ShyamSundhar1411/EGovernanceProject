@@ -16,7 +16,7 @@ class PassPort(models.Model):
     Name = models.CharField(max_length = 45,help_text = "(Max 45 Characters)")
     Surname = models.CharField(max_length = 45,help_text = "(Max 45 Characters)",blank = True)
     No_of_Pages = models.IntegerField(choices = Page_Choices)
-    PAN = models.CharField(max_length = 500,validators=[RegexValidator(PAN_Validator,message = "Enter a Valid PAN Number")],blank = True,null = True)
+    PAN = models.CharField(max_length = 500,validators=[RegexValidator(PAN_Validator,message = "Enter a Valid PAN Number")],null = True)
     Aadhaar_Number = models.CharField(max_length = 500,validators=[RegexValidator(aadhaar_Validator,message = "Enter a Valid Aadhar Number")],null = True,help_text = "Enter Aadhaar with requried spaces")
     Gender = models.CharField(max_length = 500)
     Date_of_Birth = models.DateField()
@@ -35,6 +35,7 @@ class PassPort(models.Model):
     Application_Id = models.PositiveBigIntegerField(blank = True)
     slug = AutoSlugField(populate_from = "Name",unique=True)
     Date_of_Application = models.DateTimeField(auto_now = True)
+    Remark = models.TextField(max_length = 500,blank = True)
     def __str__(self):
         return self.user.username
     def save(self, *args, **kwargs):
@@ -52,7 +53,7 @@ class Document(models.Model):
     PAN_Card = models.FileField(upload_to = "Documents/certificates/pan/")
     Certificate = models.FileField(upload_to = "Documents/certificates/birth_marriage/")
     Educational_Certificate = models.FileField(upload_to = "Documents/certificates/education")
-    Voter_ID = models.FileField(upload_to = "Documents/certificates/voter_id")
+    Voter_ID = models.FileField(upload_to = "Documents/certificates/voter_id",blank = True)
     slug = models.SlugField(max_length = 100)
     def __str__(self):
         return str(self.Passport.Application_Id)+'-Document Upload'
