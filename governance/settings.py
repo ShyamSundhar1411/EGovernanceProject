@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
     'services',
+    #Third Party
+    'social_django',
+    'phonenumber_field',
     'autoslug',
     'crispy_forms'
 ]
@@ -130,6 +132,9 @@ STATICFILES_DIRS  = [
 #Media Serves
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+#PhoneNumber
+PHONENUMBER_DEFAULT_REGION = "IN"
+PHONENUMBER_DEFAULT_FORMAT = "INTERNATIONAL"
 #Messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
