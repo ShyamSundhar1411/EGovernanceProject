@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'social_django',
     'phonenumber_field',
     'autoslug',
-    'crispy_forms'
+    'crispy_forms',
+    'termsandconditions',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'termsandconditions.middleware.TermsAndConditionsRedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'governance.urls'
@@ -71,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -169,6 +173,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'email',
 ]
 SITE_ID = 1
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 #Login
 LOGIN_URL = "home"
 LOGIN_REDIRECT_URL = "dashboard"
@@ -180,3 +185,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#Terms
+ACCEPT_TERMS_PATH = '/terms/accept/'
+TERMS_EXCLUDE_URL_PREFIX_LIST = {'/admin/','/logout/','/'}
+TERMS_CACHE_SECONDS = 30
+TERMS_EXCLUDE_SUPERUSERS = True

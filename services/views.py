@@ -3,7 +3,7 @@ from . forms import DocumentUploadForm, PassPortApplicationForm
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from termsandconditions.decorators import terms_required
 
 # Create your views here.
 def home(request):
@@ -11,6 +11,7 @@ def home(request):
         return redirect("dashboard")
     return render(request,"services/home.html")
 @login_required
+@terms_required
 def dashboard(request):
     if request.user.is_superuser:
         passports = PassPort.objects.prefetch_related("user").all()
