@@ -42,7 +42,7 @@ class PassPort(models.Model):
             self.Application_Id = random.randint(0,10000)
         super(PassPort,self).save(*args,**kwargs)
 class Document(models.Model):
-    Passport = models.ForeignKey(PassPort,on_delete = models.CASCADE)
+    Passport = models.OneToOneField(PassPort,on_delete = models.CASCADE)
     Father_Name = models.CharField(max_length = 100)
     Mother_Name = models.CharField(max_length=100)
     Mobile_Number = PhoneNumberField()
@@ -55,10 +55,10 @@ class Document(models.Model):
     Voter_ID = models.FileField(upload_to = "Documents/certificates/voter_id")
     slug = models.SlugField(max_length = 100)
     def __str__(self):
-        return str(self.PassPort.Application_Id)+'-Document Upload'
+        return str(self.Passport.Application_Id)+'-Document Upload'
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = uuid.uuid4()
-        super(PassPort,self).save(*args,**kwargs)
+        super(Document,self).save(*args,**kwargs)
     
     

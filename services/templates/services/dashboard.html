@@ -8,7 +8,7 @@
             {% if passport.Application_Status == "In Queue" %}
                 <li class="list-group-item list-group-item-dark">{{passport.Application_Id}}
                     {% if user.is_superuser %}
-                        <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
                         Nothing
                     {% endif %}
@@ -16,7 +16,7 @@
             {% elif passport.Application_Status == "Processed and Approved" %}
                 <li class="list-group-item list-group-item-success">{{passport.Application_Id}}
                     {% if user.is_superuser %}
-                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
                     Nothing
                     {% endif %}
@@ -24,15 +24,15 @@
             {% elif passport.Application_Status == "Awaiting Documents Upload" %}
                 <li class="list-group-item list-group-item-info">{{passport.Application_Id}}
                     {% if user.is_superuser %}
-                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
-                    Nothing
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'upload_document' passport.id passport.slug %}"> <i class="fa-solid fa-upload"></i></a>
                     {% endif %}
                 </li>
             {% else %}
             <li class="list-group-item list-group-item-danger">{{passport.Application_Id}}
                 {% if user.is_superuser %}
-                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}" <i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                 {% else %}
                     Nothing
                  {% endif %}
