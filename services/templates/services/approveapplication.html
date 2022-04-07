@@ -2,7 +2,7 @@
 {% block content %}
 <div class = "container">
     <h1 class = "text-center">Application No : {{Application.Application_Id}}</h1>
-    <p class="text-center text-muted"><span class="date">{{Application.Date_of_Application|date:'M d, Y'}}</span></p>
+    <p class="text-center text-muted"><span class="date">{{Application.Date_of_Application|date:'M d, Y'}}</span>| Status : {{Application.Application_Status}}</p>
     <hr/>
     <div class="card">
         <div class="card-body">
@@ -15,6 +15,15 @@
                     <h5 class="card-text">Surname : {{Application.Surname}}</h5>
                 </div>
                 {% endif %}
+            </div>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-3">
+                    <h5 class="card-text">Father's Name : {{Document.Father_Name}}</h5>
+                </div>
+                
+                <div class = "col-md-3">
+                    <h5 class="card-text">Mother's Name : {{Document.Mother_Name}}</h5>
+                </div>
             </div>
             <div class = "row" style = "margin-bottom:20px;">
                 <div class = "col-md-4">
@@ -55,7 +64,7 @@
                     <h5 class="card-text">Is Applicant Eligible for Non-ECR Category ?  {% if Application.Non_ECR_Category %}Yes{% else %}No{% endif %}</h5>
                 </div>
             </div>
-            <div class = "row">
+            <div class = "row" style = "margin-bottom:20px;">
                 <div class = "col-md-6">
                     <h5 class="card-text">Is either of your parent (in case of minor)/spouse, a government servant ? {% if Application.Government_Servant %}Yes{% else %}No{% endif %}</h5>
                 </div>
@@ -63,7 +72,50 @@
                     <h5 class="card-text">Type of Passport Applied : {{Application.No_of_Pages}} Pages</h5>
                 </div>
             </div>
+            <div class = "row" style = "margin-bottom:20px;">
+                <div class = "col-md-6">
+                    <h5 class="card-text">PAN Number : {{Application.PAN }}</h5>
+                </div>
+                <div class = "col-md-6">
+                    <h5 class="card-text">Aadhaar Number : {{Application.Aadhaar_Number }}</h5>
+                </div>
+            </div>
+            <h4 class = "card-text">Documents and Contact Details</h4>
+            <hr/>
+            <div class = "row">
+                {% if Document.Email_ID %}
+                    <div class = "col-md-4">
+                        <h5 class="card-text">Email ID : {{Document.Email_ID }}</h5>
+                    </div>
+                {% endif %}
+                <div class = "col-md-4">
+                    <h5 class="card-text">Mobile Number : {{Document.Mobile_Number }}</h5>
+                </div>
+                {% if Document.Telephone_Number %}
+                <div class = "col-md-4">
+                    <h5 class="card-text">Telephone Number : {{Document.Telephone_Number}}</h5>
+                </div>
+                {% endif %}
+            </div>
+            <h5><a href = "{{Document.Certificate.url}}">Birth Certificate/Marriage Certificate</a></h5>
+            <h5><a href = "{{Document.Educational_Certificate.url}}">Educational Certificate</a></h5>
+            <h5><a href = "{{Document.PAN.url}}">PAN Card</a></h5>
+            <h5><a href = "{{Document.Aadhaar_Card.url}}">Aadhaar Card</a></h5>
+            {% if Document.Voter_ID %}
+            <h5><a href = "{{Document.Voter_ID.url}}">Voter ID</a></h5>
+            {% endif %}
+            <h5><a href = "{{Document.Signature.url}}">Signature</a></h5>
         </div>
+    </div>
+    <div class = "d-inline-block py-2">
+        <form method = "POST" action = "{% url 'approval_confirmation' Application.id Application.slug %}" style = "margin-bottom:20px;">
+            {% csrf_token %}
+            <button class = "btn btn-outline-success" type = "submit">Approve</button>
+        </form>
+        <form method = "POST" action = "{% url 'cancellation_confirmation' Application.id Application.slug %}">
+            {% csrf_token %}
+            <button class = "btn btn-outline-danger" type = "submit">Cancel</button>
+        </form>
     </div>
 </div>
 {% endblock %}

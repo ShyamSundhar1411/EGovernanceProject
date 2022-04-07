@@ -19,4 +19,4 @@ class DocumentUploadForm(forms.ModelForm):
     Mother_Name = forms.CharField(label = "Mother's Name")
     class Meta:
         model = Document
-        fields = ["Father_Name","Mother_Name","Mobile_Number","Telephone_Number","Email_ID","Aadhar_Card", "PAN_Card","Certificate","Educational_Certificate","Voter_ID"]
+        fields = ["Father_Name","Mother_Name","Mobile_Number","Telephone_Number","Email_ID","Aadhar_Card", "PAN_Card","Certificate","Educational_Certificate","Voter_ID","Signature"]

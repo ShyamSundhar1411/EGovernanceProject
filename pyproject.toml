@@ -15,6 +15,7 @@ django-autoslug = "^1.9.8"
 social-auth-app-django = "^5.0.0"
 django-crispy-forms = "^1.14.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.1.0"}
+python-social-auth = {extras = ["django"], version = "^0.3.6"}
 
 [tool.poetry.dev-dependencies]
 

@@ -10,7 +10,7 @@
                     {% if user.is_superuser %}
                         <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
-                        Nothing
+                    <h5 class = "float-end">In Queue</h5>
                     {% endif %}
                 </li>
             {% elif passport.Application_Status == "Processed and Approved" %}
@@ -18,7 +18,7 @@
                     {% if user.is_superuser %}
                     <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
-                    Nothing
+                        <h5 class = "float-end">Processed and Approved</h5>
                     {% endif %}
                 </li>
             {% elif passport.Application_Status == "Awaiting Documents Upload" %}
@@ -34,12 +34,13 @@
                 {% if user.is_superuser %}
                     <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                 {% else %}
-                    Nothing
+                    <h5 class = "float-end">Cancelled-{{passport.Remark}}</h5>
                  {% endif %}
             </li>
             {% endif %}
         {% endfor %}
     </ul>
+    <div class = "py-2"><a class = "btn btn-primary" style="background: linear-gradient(-140deg, #405de6 0%, #5851d8 17%, #833ab4 37%, #c13584 49%, #e1306c 72%, #e1306c 88%, #ee8bac 97%, #ffdc80 100%), var(--bs-red);" href = "{% url 'passport_application' %}"> <i class="fa fa-plus"></i> Apply</a></div>
     <div class = "d-inline-block py-2">
         <a class = "btn btn-primary" style="background: linear-gradient(-140deg, #405de6 0%, #5851d8 17%, #833ab4 37%, #c13584 49%, #e1306c 72%, #e1306c 88%, #ee8bac 97%, #ffdc80 100%), var(--bs-red);" href = "{% url 'logout' %}">Logout <i class="fa-solid fa-arrow-right-from-bracket"></i></a>
     </div>

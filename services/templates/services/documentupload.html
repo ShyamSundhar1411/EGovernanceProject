@@ -5,7 +5,9 @@
     <form method = "POST" enctype = "multipart/form-data">
         {% csrf_token %}
     {{form|crispy}}
-    <button type = "submit">Submit</button>
+        <div class = "d-inline-block py-2">
+            <button class = "btn btn-outline-success" type = "submit"><i class="fa-solid fa-upload"></i> Upload</button>
+        </div>
     </form>
 </div>
 {% endblock %}

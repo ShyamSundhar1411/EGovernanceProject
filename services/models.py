@@ -54,6 +54,7 @@ class Document(models.Model):
     Certificate = models.FileField(upload_to = "Documents/certificates/birth_marriage/")
     Educational_Certificate = models.FileField(upload_to = "Documents/certificates/education")
     Voter_ID = models.FileField(upload_to = "Documents/certificates/voter_id",blank = True)
+    Signature = models.FileField(upload_to = "Documents/certificates/pan/signature/")
     slug = models.SlugField(max_length = 100)
     def __str__(self):
         return str(self.Passport.Application_Id)+'-Document Upload'

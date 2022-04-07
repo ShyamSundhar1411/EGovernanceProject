@@ -27,6 +27,7 @@ def passportapplciation(request):
             passport.user = request.user
             if application:
                 passport.Application_Status = "Cancelled"
+                passport.Remark = "Cancelled due to mutiple applications in queue"
             else:
                 passport.Application_Status = "Awaiting Documents Upload"
             #passport.
@@ -80,6 +81,7 @@ def cancelapplication(request,pk,slug):
     Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
     if request.method == "POST" and request.user.is_superuser:
         Application.Application_Status = "Cancelled"
+        Application.Remark = "Cancelled Due to some issues or discrepancy with Documents Uploaded"
         Application.save()
         messages.success(request,"Approved Application successfully")
         return redirect("approve_application",pk = pk,slug = slug)
