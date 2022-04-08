@@ -87,7 +87,7 @@ def cancelapplication(request,pk,slug):
         Application.Application_Status = "Cancelled"
         Application.Remark = "Cancelled Due to some issues or discrepancy with Documents Uploaded"
         Application.save()
-        messages.success(request,"Approved Application successfully")
+        messages.success(request,"Cancelled Application successfully")
         return redirect("approve_application",pk = pk,slug = slug)
     else:
         messages.error(request,"Error While Processing Request")
