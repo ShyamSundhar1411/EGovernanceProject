@@ -17,6 +17,7 @@ django-crispy-forms = "^1.14.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^6.1.0"}
 python-social-auth = {extras = ["django"], version = "^0.3.6"}
 django-termsandconditions = "^2.0.9"
+django-cloudinary-storage = "^0.3.0"
 
 [tool.poetry.dev-dependencies]
 

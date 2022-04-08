@@ -107,16 +107,5 @@
             <h5><a href = "{{Document.Signature.url}}">Signature</a></h5>
         </div>
     </div>
-    <div class = "d-inline-block py-2">
-        <form method = "POST" action = "{% url 'approval_confirmation' Application.id Application.slug %}" style = "margin-bottom:20px;">
-            {% csrf_token %}
-            <button class = "btn btn-outline-success" type = "submit">Approve</button>
-        </form>
-        <form method = "POST" action = "{% url 'cancellation_confirmation' Application.id Application.slug %}">
-            {% csrf_token %}
-            <button class = "btn btn-outline-danger" type = "submit">Cancel</button>
-        </form>
-    </div>
-    <a class = "btn btn-outline-success" href = "{% url 'dashboard' %}">Go Back</a>
 </div>
 {% endblock %}

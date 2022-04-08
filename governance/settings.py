@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'autoslug',
     'crispy_forms',
     'termsandconditions',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -190,3 +192,11 @@ ACCEPT_TERMS_PATH = '/terms/accept/'
 TERMS_EXCLUDE_URL_PREFIX_LIST = {'/admin/','/logout/','/'}
 TERMS_CACHE_SECONDS = 30
 TERMS_EXCLUDE_SUPERUSERS = True
+#Storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env.str('CLOUD_NAME'),
+    'API_KEY': env.str('API_KEY'),
+    'API_SECRET': env.str('API_SECRET')
+}
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

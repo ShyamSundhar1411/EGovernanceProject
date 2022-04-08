@@ -21,7 +21,7 @@ def dashboard(request):
 @login_required
 def passportapplciation(request):
     if request.method == "POST":
-        application = PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "In Queue").exists() or PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "Awaiting Document Upload").exists()
+        application = PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "In Queue").exists() or PassPort.objects.prefetch_related("user").filter(user = request.user,Application_Status = "Awaiting Documents Upload").exists()
         passportform = PassPortApplicationForm(request.POST)
         if passportform.is_valid():
             passport = passportform.save(commit = False)
@@ -64,7 +64,10 @@ def upload_document(request,pk,slug):
 def approvalapplicationpage(request,pk,slug):
     if request.user.is_superuser:
         Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug)
-        Documents = Document.objects.prefetch_related("Passport").get(Passport = Application)
+        try:
+            Documents = Document.objects.prefetch_related("Passport").get(Passport = Application)
+        except:
+            Documents = None
         return render(request,"services/approveapplication.html",{"Application":Application,"Document":Documents})
     else:
         return redirect("dashboard")
@@ -89,3 +92,13 @@ def cancelapplication(request,pk,slug):
     else:
         messages.error(request,"Error While Processing Request")
         return redirect("approve_application",pk = pk,slug = slug)
+@login_required
+def preview_application(request,pk,slug):
+    Application = PassPort.objects.prefetch_related("user").get(id = pk,slug = slug,user = request.user)
+    Documents = Document.objects.prefetch_related("Passport").get(Passport = Application)
+    return render(request,"services/preview_application.html",{"Application":Application,"Document":Documents})
+def about(request):
+    return render(request,"services/about.html")
+def contact(request):
+    return render(request,"services/contact.html")
+    

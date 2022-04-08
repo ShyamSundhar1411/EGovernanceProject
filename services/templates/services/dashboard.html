@@ -10,7 +10,7 @@
                     {% if user.is_superuser %}
                         <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
-                    <h5 class = "float-end">In Queue</h5>
+                        <a class = "{% url 'preview_application' passport.id passport.slug %}"><i class="fa-solid fa-eye"></i></a><h5 class = "float-end">In Queue</h5>
                     {% endif %}
                 </li>
             {% elif passport.Application_Status == "Processed and Approved" %}
@@ -34,7 +34,10 @@
                 {% if user.is_superuser %}
                     <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                 {% else %}
-                    <h5 class = "float-end">Cancelled-{{passport.Remark}}</h5>
+                    <div class = "float-end">
+                        <span class = "float-end">Cancelled-<span class = "text-muted">{{passport.Remark}}</span></span>
+                    </div>
+
                  {% endif %}
             </li>
             {% endif %}
