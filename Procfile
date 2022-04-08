@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn python manage.py collectstatic --no-input; governance.wsgi
+web:  python manage.py collectstatic --no-input; gunicorn governance.wsgi
