@@ -97,14 +97,14 @@
                 </div>
                 {% endif %}
             </div>
-            <h5><a href = "{{Document.Certificate.url}}">Birth Certificate/Marriage Certificate</a></h5>
-            <h5><a href = "{{Document.Educational_Certificate.url}}">Educational Certificate</a></h5>
-            <h5><a href = "{{Document.PAN.url}}">PAN Card</a></h5>
-            <h5><a href = "{{Document.Aadhaar_Card.url}}">Aadhaar Card</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.Certificate.url}}">Birth Certificate/Marriage Certificate</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.Educational_Certificate.url}}">Educational Certificate</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.PAN.url}}">PAN Card</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.Aadhaar_Card.url}}">Aadhaar Card</a></h5>
             {% if Document.Voter_ID %}
-            <h5><a href = "{{Document.Voter_ID.url}}">Voter ID</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.Voter_ID.url}}">Voter ID</a></h5>
             {% endif %}
-            <h5><a href = "{{Document.Signature.url}}">Signature</a></h5>
+            <h5><a class = "custom_link" href = "{{Document.Signature.url}}">Signature</a></h5>
         </div>
     </div>
     <div class = "d-inline-block py-2">

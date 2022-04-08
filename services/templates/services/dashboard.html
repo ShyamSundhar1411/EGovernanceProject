@@ -10,7 +10,7 @@
                     {% if user.is_superuser %}
                         <a class = "btn btn-outline-primary float-end" href = "{% url 'approve_application' passport.id passport.slug %}"> <i class="fa-solid fa-pen-to-square"></i></a>
                     {% else %}
-                        <span class = "float-end"><a href = "{% url 'preview_application' passport.id passport.slug %}"><i class="fa-solid fa-eye"></i></a><h5>In Queue</h5></span>
+                        <span class = "float-end"><a href = "{% url 'preview_application' passport.id passport.slug %}"><i class="fa-solid fa-eye"></i></a> In Queue</span>
                     {% endif %}
                 </li>
             {% elif passport.Application_Status == "Processed and Approved" %}

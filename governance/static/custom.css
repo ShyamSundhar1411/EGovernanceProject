@@ -13,9 +13,10 @@
 .more:hover{
     color:violet;
 }
-.a{
+.custom_link{
     color:black;
+    text-decoration: none;
 }
-.a:hover{
+.custom_link:hover{
     color:purple;
 }
