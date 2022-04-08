@@ -6,3 +6,10 @@
 .social_auth:hover{
     transform: scale(1.5);
 }
+.more{
+    text-decoration:none;
+    color: gray;
+}
+.more:hover{
+    color:violet;
+}
